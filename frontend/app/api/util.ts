@@ -12,6 +12,7 @@ const getApiUrl = () => {
 }
 
 export const apiBaseUrl = getApiUrl() + "/api";
+export const wsBaseUrl = getApiUrl() + "/ws";
 
 export function getConfig(auth: boolean): AxiosRequestConfig {
   const header = new AxiosHeaders({

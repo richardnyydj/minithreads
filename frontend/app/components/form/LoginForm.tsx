@@ -9,6 +9,7 @@ import { selectError, selectStatus, selectUser } from '../../store/features/user
 import { AppDispatch } from '../../store/store';
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
+import { wsBaseUrl } from '@/app/api/util';
 
 interface LoginFormData {
   username: string;
@@ -35,13 +36,13 @@ const LoginForm: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const socket = new SockJS("http://localhost:8080/ws");
+    const socket = new SockJS(wsBaseUrl);
     const client = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000, // Auto-reconnect
       debug: (str) => console.log(str), // Debugging logs
     });
-    
+
     client.onConnect = (frame) => {
       console.log("Connected: " + frame);
     };
